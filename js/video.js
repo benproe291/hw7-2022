@@ -2,10 +2,12 @@ let video = document.querySelector('#player1')
 
 window.addEventListener('load', function () {
   console.log('Good job opening the window')
+  video.autoplay = false
 })
 
 document.querySelector('#play').addEventListener('click', function () {
   console.log('Keypress: Play Video')
+  document.querySelector('#volume').innerHTML = video.volume*100 + '%';
   video.play()
 })
 
@@ -35,7 +37,13 @@ document.querySelector('#skip').addEventListener('click', function () {
 
 document.querySelector('#mute').addEventListener('click', function () {
   console.log('Keypress: Skip Ahead')
-  video.muted = true
+  if (video.muted) {
+    video.muted = false 
+    document.querySelector('#mute').innerHTML = 'Mute'
+  } else {
+    video.muted = true
+    document.querySelector('#mute').innerHTML = 'Unmute'
+  }
   console.log('Current Playback Muted?', video.muted)
-  console.log('Current Playback Volume', video.volume)
+  console.log('Current Playback Volume', video.volume*100)
 })
