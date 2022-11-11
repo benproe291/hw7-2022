@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
 
 document.querySelector('#play').addEventListener('click', function () {
   console.log('Keypress: Play Video')
-  document.querySelector('#volume').innerHTML = video.volume*100 + '%';
+  document.querySelector('#volume').innerHTML = video.volume * 100 + '%'
   video.play()
 })
 
@@ -38,12 +38,39 @@ document.querySelector('#skip').addEventListener('click', function () {
 document.querySelector('#mute').addEventListener('click', function () {
   console.log('Keypress: Skip Ahead')
   if (video.muted) {
-    video.muted = false 
+    video.muted = false
     document.querySelector('#mute').innerHTML = 'Mute'
   } else {
     video.muted = true
     document.querySelector('#mute').innerHTML = 'Unmute'
   }
   console.log('Current Playback Muted?', video.muted)
-  console.log('Current Playback Volume', video.volume*100)
+  console.log('Current Playback Volume', video.volume * 100)
 })
+
+// Listener and modifier for the volume slider
+let i = document.querySelector('#slider'),
+  o = document.querySelector('#volume')
+
+o.innerHTML = i.value
+i.addEventListener(
+  'input',
+  function () {
+    o.innerHTML = i.value + '%'
+    video.volume = i.value / 100
+    console.log(video.volume)
+  },
+  false
+)
+
+// Changing the 'Old School' class on the video
+document.querySelector('#vintage').addEventListener('click', function () {
+    // document.querySelector('#video').innerHTML = 'class = oldSchool'
+    document.querySelector('.video').classList.add('oldSchool');
+    console.log('Vintage Button Press')
+  })
+  document.querySelector('#orig').addEventListener('click', function () {
+    // document.querySelector('#video').innerHTML = 'class = oldSchool'
+    document.querySelector('.video').classList.remove('oldSchool');
+    console.log('Normal Button Press')
+  })
